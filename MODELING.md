@@ -80,9 +80,9 @@ For each relationship, state whether you embedded or referenced, and **why** (on
 | Relationship                       | Embed or Reference? | Why? |
 |-----------------------------------|---------------------|------|
 | Subtasks inside a task            |Embed                |Subtasks are always read and written together with their parent task and have no independent existence. |
-| Tags on a task                    |Embed                |Tags are simple strings owned by the task; embedding avoids a separate collection lookup.       |
-| Project → Task ownership          |Reference            |Tasks are queried independently by project or status, so storing a projectId reference allows flexible filtering.      |
-| Note → optional Project link      |Reference            |A note may or may not belong to a project. Storing an optional projectId reference keeps notes self-contained. |
+| Tags on a task                    |Embed                |Tags are simple strings owned by the task. Embedding avoids a separate collection lookup.       |
+| Project => Task ownership          |Reference            |Tasks are queried independently by project or status, so storing a projectId reference allows flexible filtering.      |
+| Note => optional Project link      |Reference            |A note may or may not belong to a project. Storing an optional projectId reference keeps notes self-contained. |
 
 ---
 
