@@ -11,7 +11,6 @@ const { connect } = require('./db/connection');
   await db.collection('notes').deleteMany({});
   await db.collection('users').createIndex({ email: 1 }, { unique: true });
 
-  // ── USERS ──────────────────────────────────────────────────────────────────
   const hash1 = await bcrypt.hash('password123', 10);
   const hash2 = await bcrypt.hash('securepass', 10);
 

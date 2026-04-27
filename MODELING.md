@@ -81,7 +81,7 @@ For each relationship, state whether you embedded or referenced, and **why** (on
 |-----------------------------------|---------------------|------|
 | Subtasks inside a task            |Embed                |Subtasks are always read and written together with their parent task and have no independent existence. |
 | Tags on a task                    |Embed                |Tags are simple strings owned by the task; embedding avoids a separate collection lookup.       |
-| Project → Task ownership          |Reference            |asks are queried independently by project or status, so storing a projectId reference allows flexible filtering.      |
+| Project → Task ownership          |Reference            |Tasks are queried independently by project or status, so storing a projectId reference allows flexible filtering.      |
 | Note → optional Project link      |Reference            |A note may or may not belong to a project. Storing an optional projectId reference keeps notes self-contained. |
 
 ---
@@ -91,11 +91,3 @@ For each relationship, state whether you embedded or referenced, and **why** (on
 Name one field that exists on **some** documents but not **all** in the same collection. Explain why this is acceptable (or even useful) in MongoDB.
 
 > The dueDate field exists on some task documents but not all. In MongoDB this is acceptable because documents in the same collection do not need identical fields. Tasks without a deadline simply omit the field entirely rather than storing a null, which keeps documents clean and reflects real-world data naturally.
-
-
-
-
-
-
-
-
