@@ -42,3 +42,14 @@ async function archiveProject(db, projectId) {
     matchedCount: result.matchedCount, modifiedCount: result.modifiedCount
   };
 }
+
+async function listProjectTasks(db, projectId, status) {
+ const filter = { projectId: projectId };
+ if (status) {
+   filter.status = status;
+ }
+ return await db.collection('tasks')
+   .find(filter)
+   .sort({ priority: -1, createdAt: -1 })
+   .toArray();
+}
