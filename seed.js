@@ -4,7 +4,6 @@ const { connect } = require('./db/connection');
 
 (async () => {
   const db = await connect();
-
   await db.collection('users').deleteMany({});
   await db.collection('projects').deleteMany({});
   await db.collection('tasks').deleteMany({});
