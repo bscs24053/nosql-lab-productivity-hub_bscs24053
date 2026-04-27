@@ -20,3 +20,14 @@ async function listUserProjects(db, ownerId) {
    .sort({ createdAt: -1 })
    .toArray();
 }
+
+async function createProject(db, projectData) {
+ const result = await db.collection('projects').insertOne({
+   ownerId: projectData.ownerId,
+   name: projectData.name,
+   description: projectData.description || '',
+   archived: false,
+   createdAt: new Date()
+ });
+ return result;
+}
