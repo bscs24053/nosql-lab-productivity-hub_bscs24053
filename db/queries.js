@@ -31,3 +31,14 @@ async function createProject(db, projectData) {
  });
  return result;
 }
+
+async function archiveProject(db, projectId) {
+  const result = await db.collection('projects').updateOne(
+    { _id: projectId },
+    { $set: { archived: true } }
+  );
+
+  return {
+    matchedCount: result.matchedCount, modifiedCount: result.modifiedCount
+  };
+}
