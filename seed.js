@@ -28,7 +28,7 @@ const { connect } = require('./db/connection');
   });
 
   const alishayId = u1.insertedId;
-  const burhanId   = u2.insertedId;
+  const burhanId = u2.insertedId;
 
 
   const p1 = await db.collection('projects').insertOne({
@@ -62,8 +62,8 @@ const { connect } = require('./db/connection');
     createdAt: new Date('2024-11-05')
   });
 
-  const fyp  = p1.insertedId;
-  const web  = p2.insertedId;
+  const fyp = p1.insertedId;
+  const web = p2.insertedId;
   const ecom = p3.insertedId;
   const blog = p4.insertedId;
 
