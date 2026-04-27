@@ -67,3 +67,29 @@ async function createTask(db, taskData) {
  });
  return result;
 }
+
+async function updateTaskStatus(db, taskId, newStatus) {
+ const result = await db.collection('tasks').updateOne(
+   { _id: taskId },
+   { $set: { status: newStatus } }
+ );
+ return result;
+}
+
+
+async function addTaskTag(db, taskId, tag) {
+ const result = await db.collection('tasks').updateOne(
+   { _id: taskId },
+   { $addToSet: { tags: tag } }
+ );
+ return result;
+}
+
+
+async function removeTaskTag(db, taskId, tag) {
+ const result = await db.collection('tasks').updateOne(
+   { _id: taskId },
+   { $pull: { tags: tag } }
+ );
+ return result;
+}
