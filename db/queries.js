@@ -14,3 +14,9 @@ async function loginFindUser(db, email) {
   return await db.collection('users').findOne({ email: email });
 }
 
+async function listUserProjects(db, ownerId) {
+ return await db.collection('projects')
+   .find({ ownerId: ownerId, archived: false })
+   .sort({ createdAt: -1 })
+   .toArray();
+}
