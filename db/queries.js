@@ -77,19 +77,25 @@ async function updateTaskStatus(db, taskId, newStatus) {
 }
 
 async function addTaskTag(db, taskId, tag) {
- const result = await db.collection('tasks').updateOne(
-   { _id: taskId },
-   { $addToSet: { tags: tag } }
- );
- return result;
+  const result = await db.collection('tasks').updateOne(
+    { _id: taskId },
+    { $addToSet: { tags: tag } }
+  );
+
+  return {
+    matchedCount: result.matchedCount, modifiedCount: result.modifiedCount
+  };
 }
 
 async function removeTaskTag(db, taskId, tag) {
- const result = await db.collection('tasks').updateOne(
-   { _id: taskId },
-   { $pull: { tags: tag } }
- );
- return result;
+  const result = await db.collection('tasks').updateOne(
+    { _id: taskId },
+    { $pull: { tags: tag } }
+  );
+
+  return {
+    matchedCount: result.matchedCount, modifiedCount: result.modifiedCount
+  };
 }
 
 async function toggleSubtask(db, taskId, subtaskTitle, newDone) {
@@ -125,10 +131,10 @@ async function projectTaskSummary(db, ownerId) {
    {
      $group: {
        _id: '$projectId',
-       todo:       { $sum: { $cond: [{ $eq: ['$status', 'todo'] },        1, 0] } },
+       todo:{ $sum: { $cond: [{ $eq: ['$status', 'todo'] }, 1, 0] } },
        inProgress: { $sum: { $cond: [{ $eq: ['$status', 'in-progress'] }, 1, 0] } },
-       done:       { $sum: { $cond: [{ $eq: ['$status', 'done'] },        1, 0] } },
-       total:      { $sum: 1 }
+       done: { $sum: { $cond: [{ $eq: ['$status', 'done'] }, 1, 0] } },
+       total: { $sum: 1 }
      }
    },
    {
@@ -180,7 +186,6 @@ async function recentActivityFeed(db, ownerId) {
    }
  ]).toArray();
 }
-
 
 module.exports = {
  signupUser,
